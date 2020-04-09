@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Vue JS Hello World</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" type="text/css" media="screen" href="main.css">
+        <script src="vue.js"></script>
+    </head>
+
+    <body>
+        <div id="app">
+            <h1 v-once>{{ title }}</h1>
+            <p>{{ sayHello() }} - <a v-bind:href="link" target="_blank">Google</a></p>
+            <p v-html="finishedLink"></p>
+            <!-- <input type="text" v-on:input="changeTitle"> -->
+            <!-- <p>{{ title }}</p> -->
+
+            <!-- Listening to Event-->
+            <!-- Passing your own argument with event-->
+            <button v-on:click="increase(2, $event)">Button {{ counter }}</button>
+
+            <!-- Getting Event data from the Event Object-->
+            <p v-on:mousemove="updateCoordinates">Coordinates: {{ x }} / {{ y }}</p>
+        </div>
+
+        <script>
+            new Vue({
+                el: '#app',
+                data: {
+                    title: 'Hello World',
+                    link: 'http://google.com',
+                    finishedLink: '<a href="http://youtube.com" target="_blank">Go to Youtube</a>',
+                    counter: 0,
+                    x: 0,
+                    y: 0
+                },
+                methods: {
+                    // changeTitle: function (event) {
+                    //     this.title = event.target.value;
+                    // }
+                    sayHello: function() {
+                        this.title = 'Hello';
+                        return this.title;
+                    },
+
+                    increase: function(step, event) {
+                        this.counter += step;
+                    },
+
+                    updateCoordinates: function(event) {
+                        this.x = event.clientX;
+                        this.y = event.clientY;
+                    }
+                }
+            });
+        </script>
+    </body>
+
+</html>
