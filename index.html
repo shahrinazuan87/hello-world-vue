@@ -4,7 +4,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Vue JS Hello World</title>
+        <title>Learn Vue JS</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" type="text/css" media="screen" href="main.css">
         <script src="vue.js"></script>
@@ -23,7 +23,28 @@
             <button v-on:click="increase(2, $event)">Button {{ counter }}</button>
 
             <!-- Getting Event data from the Event Object-->
-            <p v-on:mousemove="updateCoordinates">Coordinates: {{ x }} / {{ y }}</p>
+            <p v-on:mousemove="updateCoordinates">Coordinates: {{ x }} / {{ y }} -
+                <!-- Modifying an Event - with Event Modifiers-->
+                <span v-on:mousemove.stop="">Dead Spot</span>
+            </p>
+
+            <!-- Listening to Keyboard Events-->
+            <input type="text" v-on:keyup.enter="alertMe" placeholder="Please input your name.."> <br> <br>
+
+            <!-- Writing Javascript Code in the templates-->
+            <button v-on:click="counter++">Click Me</button>
+            <p>{{ counter * 2 > 10 ? 'Greater than 10' : 'Smaller than 10' }}</p>
+            
+            <!-- Using Two Way Binding-->
+            <input type="text" v-model="name">
+            <p>{{ name }}</p>
+
+            <!-- Reacting to changes with computed properties-->
+            <button v-on:click="counter++">Increase</button>
+            <button v-on:click="counter--">Decrease</button>
+            <button v-on:click="secondCounter++">Increase Second</button>
+            <p>Counter: {{ counter }} | {{ secondCounter }}</p>
+            <p>Result: {{ result() }} | {{ output }}</p>
         </div>
 
         <script>
@@ -35,8 +56,27 @@
                     finishedLink: '<a href="http://youtube.com" target="_blank">Go to Youtube</a>',
                     counter: 0,
                     x: 0,
-                    y: 0
+                    y: 0,
+                    name: 'Shahrin',
+                    secondCounter: 0
                 },
+                /** computed - Dependent properties */
+                computed: {
+                    output: function() {
+                        console.log('Computed');
+                        return this.counter > 5 ? 'Greater than 5' : 'Smaller than 5';
+                    }
+                },
+                /** watch - Execute code upon data changes */
+                watch: {
+                    counter: function(value) {
+                        var vm = this;
+                        setTimeout(function() {
+                            vm.counter = 0;
+                        },2000);
+                    }
+                },
+                /** methods - Methods of this Vue Instance */
                 methods: {
                     // changeTitle: function (event) {
                     //     this.title = event.target.value;
@@ -53,6 +93,19 @@
                     updateCoordinates: function(event) {
                         this.x = event.clientX;
                         this.y = event.clientY;
+                    },
+
+                    // dummy: function(event) {
+                    //     event.stopPropagation();
+                    // }
+
+                    alertMe: function(event) {
+                        alert('Your name was: ' + event.target.value);
+                    },
+
+                    result: function() {
+                        console.log('Methods');
+                        return this.counter > 5 ? 'Greater than 5' : 'Smaller than 5';
                     }
                 }
             });
