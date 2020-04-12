@@ -11,10 +11,10 @@ https://vuejs.org/v2/guide/events.html#Key-Modifiers
 - v-on for event. Shortform use @ like @click
 - v-bind for binding data to html element. Shortform use : like :href
 
-- Known Options for Vue Instance
-el - Connect to DOM
-data - Store data to be used
-methods - Methods of this Vue Instance
-computed - Dependent properties
-watch - Execute code upon data changes
+-- Known Options for Vue Instance --
+- el - Connect to DOM
+- data - Store data to be used
+- methods - Methods of this Vue Instance
+- computed - Dependent properties
+- watch - Execute code upon data changes
 
